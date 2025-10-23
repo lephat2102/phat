@@ -767,8 +767,7 @@ let galaxyAudio = null;
 
 function preloadGalaxyAudio() {
   const audioSources = [
-    "../Có Đôi Điều.mp3",
-    "./abc1.mp3"
+   "./abc1.mp3"
   ];
   const randomIndex = Math.floor(Math.random() * audioSources.length);
   const selectedSrc = audioSources[randomIndex];
@@ -1389,4 +1388,5 @@ window.addEventListener('orientationchange', () => {
   respOverlay.addEventListener('click', (e) => { if (e.target === respOverlay) hideOverlay(respOverlay, respModal); });
 
 })();
+
 
