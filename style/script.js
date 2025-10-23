@@ -1276,11 +1276,10 @@ window.addEventListener('orientationchange', () => {
   // Hiển thị khi ứng dụng xác nhận "app-ready"
   window.addEventListener('app-ready', showInvitation);
 
-  // Fallback: sau 6s từ load, hiển thị nếu chưa có sự kiện
+  // Fallback: sau 8s từ load, hiển thị nếu chưa có sự kiện
   window.addEventListener('load', ()=>{
     setTimeout(()=>{
-      if (overlay.classList.contains('hidden')) showInvitation();
-    }, 6000);
+      if (overlay.classList.contains('hidden')) 8000);
   });
 })();
 
@@ -1363,6 +1362,7 @@ window.addEventListener('orientationchange', () => {
   respOverlay.addEventListener('click', (e) => { if (e.target === respOverlay) hideOverlay(respOverlay, respModal); });
 
 })();
+
 
 
 
