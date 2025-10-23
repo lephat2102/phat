@@ -767,26 +767,50 @@ let galaxyAudio = null;
 
 function preloadGalaxyAudio() {
   const audioSources = [
-   ""
+    "../Có Đôi Điều.mp3",
+    "./abc1.mp3"
   ];
-
   const randomIndex = Math.floor(Math.random() * audioSources.length);
   const selectedSrc = audioSources[randomIndex];
 
   galaxyAudio = new Audio(selectedSrc);
   galaxyAudio.loop = true;
-  galaxyAudio.volume = 1.0;
-
+  galaxyAudio.volume = 0; // 🔇 bắt đầu tắt tiếng
   galaxyAudio.preload = "auto";
+
+  // thử phát nhạc tắt tiếng
+  galaxyAudio.play().then(() => {
+    console.log("Đã phát âm thanh (mute).");
+    // sau 1 giây, tăng âm lượng dần lên
+    setTimeout(() => {
+      galaxyAudio.volume = 1.0;
+    }, 1000);
+  }).catch(err => {
+    console.warn("Autoplay bị chặn:", err);
+    // nếu bị chặn, tạo nút để user bật nhạc
+    const btn = document.createElement('button');
+    btn.textContent = "🎵 Bật âm nhạc";
+    btn.style.position = "fixed";
+    btn.style.left = "50%";
+    btn.style.top = "50%";
+    btn.style.transform = "translate(-50%, -50%)";
+    btn.style.zIndex = 99999;
+    btn.style.padding = "12px 24px";
+    btn.style.fontSize = "18px";
+    btn.style.borderRadius = "8px";
+    document.body.appendChild(btn);
+    btn.addEventListener("click", async () => {
+      try {
+        galaxyAudio.volume = 1.0;
+        await galaxyAudio.play();
+        btn.remove();
+      } catch (e) {
+        console.warn("Không thể phát âm thanh:", e);
+      }
+    });
+  });
 }
 
-function playGalaxyAudio() {
-  if (galaxyAudio) {
-    galaxyAudio.play().catch(err => {
-      console.warn("Audio play blocked or delayed:", err);
-    });
-  }
-}
 preloadGalaxyAudio();
 
 
@@ -1365,3 +1389,4 @@ window.addEventListener('orientationchange', () => {
   respOverlay.addEventListener('click', (e) => { if (e.target === respOverlay) hideOverlay(respOverlay, respModal); });
 
 })();
+
