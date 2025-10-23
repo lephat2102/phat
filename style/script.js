@@ -1279,7 +1279,7 @@ window.addEventListener('orientationchange', () => {
   // Fallback: sau 8s từ load, hiển thị nếu chưa có sự kiện
   window.addEventListener('load', ()=>{
     setTimeout(()=>{
-     if (overlay.classList.contains('hidden')) showInvitation();
+      if (overlay.classList.contains('hidden')) showInvitation();
     }, 8000);
   });
 })();
@@ -1363,6 +1363,7 @@ window.addEventListener('orientationchange', () => {
   respOverlay.addEventListener('click', (e) => { if (e.target === respOverlay) hideOverlay(respOverlay, respModal); });
 
 })();
+
 
 
 
